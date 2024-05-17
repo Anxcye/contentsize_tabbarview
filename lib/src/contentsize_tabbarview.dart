@@ -12,6 +12,7 @@ class ContentSizeTabBarView extends StatefulWidget {
     this.controller,
     this.physics,
     this.dragStartBehavior = DragStartBehavior.start,
+    this.animationDuration = const Duration(milliseconds: 300),
   }) : super(key: key);
 
   /// This widget's selection and animation state.
@@ -39,6 +40,9 @@ class ContentSizeTabBarView extends StatefulWidget {
 
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
+
+  // The duration of the animation when the page changes.
+  final Duration animationDuration;
 
   @override
   State<ContentSizeTabBarView> createState() => _ContentSizeTabBarViewState();
@@ -210,6 +214,7 @@ class _ContentSizeTabBarViewState extends State<ContentSizeTabBarView> {
     return NotificationListener<ScrollNotification>(
       onNotification: _handleScrollNotification,
       child: ExpandablePageView(
+        animationDuration: widget.animationDuration,
         dragStartBehavior: widget.dragStartBehavior,
         controller: _pageController,
         physics: widget.physics == null
